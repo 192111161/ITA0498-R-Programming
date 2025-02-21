@@ -1,0 +1,6 @@
+
+data(airquality)
+is.data.frame(airquality)
+airquality <- airquality[order(airquality$Ozone, airquality$Solar.R, na.last = TRUE), ]
+airquality <- subset(airquality, select = -c(Solar.R, Wind))
+print(airquality)
