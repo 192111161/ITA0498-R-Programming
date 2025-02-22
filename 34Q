@@ -1,0 +1,18 @@
+library(ggplot2)
+
+df <- ChickWeight
+
+ggplot(df, aes(x = as.factor(Diet), y = weight)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "Box Plot of Weight by Diet", x = "Diet", y = "Weight") +
+  theme_minimal()
+
+ggplot(subset(df, Diet == 1), aes(x = weight)) +
+  geom_histogram(binwidth = 10, fill = "blue", color = "black") +
+  labs(title = "Histogram of Weight for Diet 1", x = "Weight", y = "Count") +
+  theme_minimal()
+
+ggplot(df, aes(x = Time, y = weight, color = as.factor(Diet))) +
+  geom_point() +
+  labs(title = "Scatter Plot of Weight vs Time by Diet", x = "Time", y = "Weight", color = "Diet") +
+  theme_minimal()
