@@ -1,0 +1,11 @@
+df <- ChickWeight
+
+model <- lm(weight ~ Time + Diet, data = df)
+
+new_data <- data.frame(Time = 10, Diet = 1)
+predicted_weight <- predict(model, new_data)
+
+actual_weight <- df$weight[df$Time == 10 & df$Diet == 1]
+error <- actual_weight - predicted_weight
+
+list(predicted_weight = predicted_weight, error = error)
