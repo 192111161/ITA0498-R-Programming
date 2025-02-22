@@ -1,0 +1,20 @@
+library(reshape2)
+
+df <- ChickWeight
+
+ordered_df <- df[order(df$Diet, df$weight), ]
+
+last_6_records <- tail(ordered_df, 6)
+
+melted_df <- melt(df, id.vars = c("Chick", "Time", "Diet"))
+
+mean_weight <- dcast(melted_df, Diet ~ variable, mean, subset = .(variable == "weight"))
+
+get_mode <- function(x) {
+  uniq_vals <- unique(x)
+  uniq_vals[which.max(tabulate(match(x, uniq_vals)))]
+}
+
+mode_weight <- aggregate(value ~ Diet, data = melted_df[melted_df$variable == "weight", ], get_mode)
+
+list(last_6_records, mean_weight, mode_weight)
